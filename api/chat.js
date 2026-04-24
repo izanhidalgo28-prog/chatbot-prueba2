@@ -54,4 +54,15 @@ if (req.method !== "POST") {
     console.error("Error interno:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   }
-}
+async function guardarCita(datos) {
+  const SHEETS_URL = https://script.google.com/macros/s/AKfycbyegKuQKTVR3Ww9F35bNJ3gxcXq8Ve8BnpL83dJcHl-1nUgouEe-IQ34unQjordKrZ5/exec;
+  try {
+    await fetch(SHEETS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos)
+    });
+  } catch (e) {
+    console.error("Error guardando cita:", e);
+  }
+}}
