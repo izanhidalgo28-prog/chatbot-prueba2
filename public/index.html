@@ -177,31 +177,9 @@ Si no sabes algo con certeza, indica que lo consultarán y llamarán al 910 234 
 
       const data = await res.json();
       const reply = data.reply || "Lo siento, no pude procesar tu consulta.";
-
-// Detectar si hay una cita en la respuesta
-if (reply.toLowerCase().includes("nombre") === false && 
-    history.some(m => m.role === "user") &&
-    (reply.toLowerCase().includes("cita") || 
-     reply.toLowerCase().includes("confirmad") ||
-     reply.toLowerCase().includes("anotad"))) {
-  
-  // Extraer datos de la conversación
-  const textoCompleto = history.map(m => m.content).join(" ");
-  await fetch("https://script.google.com/macros/s/AKfycbyegKuQKTVR3Ww9F35bNJ3gxcXq8Ve8BnpL83dJcHI-1nUgouEe-IQ34unQjordKrZ5/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      nombre: "Ver conversación",
-      tratamiento: "Ver conversación", 
-      dia: "Ver conversación",
-      hora: new Date().toLocaleString()
-    })
-  });
-}
-      
-loading.className = "msg bot";
-loading.textContent = reply;
-history.push({ role: "assistant", content: reply });
+      loading.className = "msg bot";
+        loading.textContent = reply;
+        history.push({ role: "assistant", content: reply });
 
     } catch {
       loading.className = "msg bot";
