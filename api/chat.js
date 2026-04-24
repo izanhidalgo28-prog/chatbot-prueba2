@@ -4,9 +4,15 @@
 export default async function handler(req, res) {
 
   // Solo aceptar POST
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método no permitido" });
-  }
+  if (req.method === "OPTIONS") {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  return res.status(200).end();
+}
+if (req.method !== "POST") {
+  return res.status(405).json({ error: "Método no permitido" });
+}
 
   // Permitir llamadas desde cualquier origen (ajusta esto al dominio del cliente en producción)
   res.setHeader("Access-Control-Allow-Origin", "*");
